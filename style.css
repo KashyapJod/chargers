@@ -1,0 +1,658 @@
+/* Add at the beginning of the file */
+:root {
+    --primary-green: #2ecc71;
+    --primary-dark: #27ae60;
+    --primary-light: #a8e6cf;
+    --secondary-green: #1abc9c;
+    --accent-green: #16a085;
+    --background-light: #f0f8f3;
+    --text-dark: #2c3e50;
+    --text-light: #ecf0f1;
+    --success: #2ecc71;
+    --warning: #f1c40f;
+    --error: #e74c3c;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Navbar Styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary-green);
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar .logo {
+    color: #ecf0f1;
+    font-size: 1.75rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+.navbar .logo:hover {
+    color: #3498db;
+    cursor: pointer;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-links a {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #3498db;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.nav-links a:hover {
+    color: #3498db;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Login Link Specific Styles */
+.nav-links a[href="login.html"] {
+    background-color: var(--secondary-green);
+    color: #fff;
+    padding: 0.5rem 1.5rem;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.nav-links a[href="login.html"]::after {
+    display: none;
+    /* Remove underline for login button */
+}
+
+.nav-links a[href="login.html"]:hover {
+    background-color: var(--accent-green);
+    transform: translateY(-2px);
+}
+
+/* Logout Button Styles */
+#logout-button {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: none;
+}
+
+#logout-button:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+}
+
+/* User Link Styles */
+#user-link {
+    color: #3498db;
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+}
+
+#user-link:hover {
+    color: #2980b9;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 1rem;
+    }
+
+    .navbar .logo {
+        font-size: 1.5rem;
+    }
+
+    .nav-links {
+        gap: 1rem;
+    }
+
+    .nav-links a {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+    }
+
+    .nav-links a[href="login.html"] {
+        padding: 0.5rem 1rem;
+    }
+}
+
+/* Main Container */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.booking-panel, .station-panel {
+    background-color: var(--background-light);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s ease-in-out;
+    border: 2px solid var(--primary-light);
+}
+
+.booking-panel h1, .station-panel h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+}
+
+/* Form Group Styles */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #34495e;
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus, .form-group select:focus {
+    border-color: var(--primary-green);
+    outline: none;
+    box-shadow: 0 0 5px var(--primary-light);
+}
+
+.location-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.location-btn {
+    background-color: var(--primary-green);
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.location-btn:hover {
+    background-color: var(--primary-dark);
+}
+
+/* Battery Indicator */
+.battery-indicator {
+    width: 100%;
+    height: 30px;
+    background: #f0f0f0;
+    border-radius: 15px;
+    margin: 1rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.battery-level {
+    height: 100%;
+    background: linear-gradient(90deg, var(--error) 0%, var(--warning) 50%, var(--success) 100%);
+    transition: width 0.3s ease;
+}
+
+.battery-text {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    line-height: 30px;
+    color: black;
+    font-weight: 600;
+    mix-blend-mode: difference;
+}
+
+/* Search Button */
+.search-btn {
+    width: 100%;
+    background-color: var(--primary-green);
+    color: #fff;
+    border: none;
+    padding: 1rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-btn:hover {
+    background-color: var(--primary-dark);
+}
+
+/* Map Styles */
+#map {
+    height: 400px;
+    margin-top: 1.5rem;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 0;
+}
+
+/* Station Panel Styles */
+.station-panel {
+    display: none;
+}
+
+.station-panel.active {
+    display: block;
+    animation: slideIn 0.5s ease-in-out;
+}
+
+.station-card {
+    background-color: var(--background-light);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid var(--primary-light);
+    position: relative;
+    background: linear-gradient(var(--background-light), var(--background-light)) padding-box,
+                linear-gradient(45deg, var(--primary-green), var(--secondary-green)) border-box;
+    border: 2px solid transparent;
+}
+
+.station-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.station-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.station-name {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--primary-dark);
+}
+
+.station-distance {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+.slots-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.slot-type {
+    text-align: center;
+    padding: 1rem;
+    background-color: var(--primary-light);
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    border: 1px solid var(--primary-green);
+}
+
+.slot-type:hover {
+    background-color: var(--secondary-green);
+    color: var(--text-light);
+}
+
+.slot-count {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.booking-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.booking-options {
+    display: flex;
+    gap: 1rem;
+    flex: 1;
+}
+
+.charging-select,
+.time-slot-select {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    flex: 1;
+}
+
+.charging-select:focus,
+.time-slot-select:focus {
+    border-color: var(--primary-green);
+    outline: none;
+    box-shadow: 0 0 5px var(--primary-light);
+}
+
+.button-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.book-btn, .navigate-btn {
+    background-color: var(--primary-green);
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.book-btn:hover, .navigate-btn:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.book-btn:disabled,
+.navigate-btn:disabled,
+.charging-select:disabled,
+.time-slot-select:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+    opacity: 0.7;
+    transform: none;
+}
+
+.book-btn:disabled:hover,
+.navigate-btn:disabled:hover {
+    background-color: #95a5a6;
+    transform: none;
+}
+
+/* Popup Styles */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.popup-content {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 90%;
+    animation: slideIn 0.3s ease-in-out;
+}
+
+.popup-content h2 {
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.popup-content h2 i {
+    color: #3498db;
+}
+
+.popup-body {
+    margin-bottom: 1.5rem;
+}
+
+.popup-body label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #34495e;
+}
+
+.popup-body select,
+.popup-body input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.popup-body select:focus,
+.popup-body input:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+}
+
+.popup-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.popup-btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.popup-btn i {
+    font-size: 1rem;
+}
+
+.popup-btn.confirm-btn {
+    background-color: var(--primary-green);
+}
+
+.popup-btn.confirm-btn:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.popup-btn.cancel-btn {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+.popup-btn.cancel-btn:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+}
+
+.popup-btn.close-btn {
+    background-color: #95a5a6;
+    color: #fff;
+}
+
+.popup-btn.close-btn:hover {
+    background-color: #7f8c8d;
+    transform: translateY(-2px);
+}
+
+/* Booking List Styles */
+#bookings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.booking-item {
+    background-color: var(--background-light);
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: box-shadow 0.3s ease;
+    border-left: 4px solid var(--primary-green);
+}
+
+.booking-item:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.booking-item div {
+    flex: 1;
+}
+
+.cancel-booking-btn {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cancel-booking-btn:hover {
+    background-color: #c0392b;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-container {
+        padding: 1rem;
+    }
+
+    .booking-panel, .station-panel {
+        padding: 1rem;
+    }
+
+    .station-card {
+        padding: 1rem;
+    }
+
+    .slots-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .booking-controls {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .booking-options {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .button-group {
+        width: 100%;
+    }
+
+    .book-btn, .navigate-btn {
+        width: 100%;
+    }
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--primary-dark);
+}

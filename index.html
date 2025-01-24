@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Power Up Chargers</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://unpkg.com/leaflet/dist/leaflet.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.awesome-markers/2.0.0/leaflet.awesome-markers.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.awesome-markers/2.0.0/leaflet.awesome-markers.js"></script>
+  </head>
+
+  <body>
+    <nav class="navbar">
+      <div class="logo">Power Up Chargers</div>
+      <div class="nav-links">
+        <a href="#bookings" id="bookings-link">Bookings</a>
+        <a href="login.html">Login</a>
+      </div>
+    </nav>
+    <div class="main-container">
+      <div class="booking-panel">
+        <h1><i class="fas fa-charging-station"></i> Power Up Chargers</h1>
+        <form
+          id="search-form"
+          onsubmit="event.preventDefault(); findStations();"
+        >
+          <div class="form-group">
+            <label for="location">Your Location</label>
+            <div class="location-group">
+              <input
+                type="text"
+                id="location"
+                placeholder="Enter your location"
+                required
+                title="Please enter your location"
+              />
+              <button
+                type="button"
+                class="location-btn"
+                onclick="getCurrentLocation()"
+              >
+                <i class="fas fa-location-crosshairs"></i>
+              </button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="vehicle-model">Vehicle Model</label>
+            <select id="vehicle-model" required>
+              <option value="Tesla Model 3">Tesla Model 3</option>
+              <option value="Nissan Leaf">Nissan Leaf</option>
+              <option value="Chevrolet Bolt">Chevrolet Bolt</option>
+              <option value="BMW i3">BMW i3</option>
+              <option value="Ford Mustang Mach-E">Ford Mustang Mach-E</option>
+              <option value="Hyundai Kona Electric">
+                Hyundai Kona Electric
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="charge">Current Battery Level</label>
+            <input
+              type="number"
+              id="charge"
+              placeholder="Enter current charge (0-100%)"
+              min="0"
+              max="100"
+              value="50"
+              oninput="updateBatteryIndicator()"
+              required
+            />
+            <div class="battery-indicator">
+              <div class="battery-level" style="width: 50%"></div>
+              <div class="battery-text">50%</div>
+            </div>
+          </div>
+          <button type="submit" class="search-btn">
+            <i class="fas fa-search"></i> Find Charging Stations
+          </button>
+        </form>
+        <div id="map"></div>
+      </div>
+
+      <div class="station-panel" id="station-panel">
+        <h1>Available Stations</h1>
+        <div id="station-list"></div>
+      </div>
+    </div>
+
+    <div id="bookings-popup" class="popup" style="display: none">
+      <div class="popup-content">
+        <h2>Your Bookings</h2>
+        <div class="popup-body">
+          <div id="bookings-list"></div>
+        </div>
+        <div class="popup-footer">
+          <button id="close-bookings" class="popup-btn close-btn">
+            <i class="fas fa-times"></i> Close
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const loggedInUser = localStorage.getItem("loggedInUser");
+        if (loggedInUser) {
+          const loginLink = document.querySelector(
+            ".nav-links a[href='login.html']"
+          );
+          loginLink.textContent = loggedInUser;
+          loginLink.href = "#";
+          loginLink.id = "user-link";
+
+          const logoutButton = document.createElement("button");
+          logoutButton.textContent = "Logout";
+          logoutButton.id = "logout-button";
+          logoutButton.style.display = "none";
+          logoutButton.onclick = function () {
+            localStorage.removeItem("loggedInUser");
+
+            // Reset the login link
+            loginLink.textContent = "Login";
+            loginLink.href = "login.html";
+            loginLink.removeAttribute("id");
+
+            // Hide logout button
+            logoutButton.style.display = "none";
+
+            // Refresh the station list if it exists
+            if (typeof findStations === "function") {
+              findStations();
+            }
+          };
+          document.querySelector(".nav-links").appendChild(logoutButton);
+
+          loginLink.addEventListener("click", function () {
+            logoutButton.style.display =
+              logoutButton.style.display === "none" ? "block" : "none";
+          });
+        }
+      });
+
+      document
+        .getElementById("bookings-link")
+        .addEventListener("click", function (event) {
+          event.preventDefault();
+          showBookingsPopup();
+        });
+
+      function showBookingsPopup() {
+        const popup = document.getElementById("bookings-popup");
+        const bookingsList = document.getElementById("bookings-list");
+        bookingsList.innerHTML = "";
+
+        bookings.forEach((booking, index) => {
+          const bookingItem = document.createElement("div");
+          bookingItem.classList.add("booking-item");
+          bookingItem.innerHTML = `
+            <div class="booking-details">
+              <div><strong>Station:</strong> ${booking.station.name}</div>
+              <div><strong>Type:</strong> ${booking.type}</div>
+              <div><strong>Time Slot:</strong> ${booking.timeSlot}</div>
+            </div>
+            <button class="cancel-booking-btn" style="float: right; background-color: red; color: white;" onclick="cancelBooking(${index})">Cancel</button>
+          `;
+          bookingsList.appendChild(bookingItem);
+        });
+
+        popup.style.display = "flex";
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Power Up Chargers</title>
+    <link rel="stylesheet" href="log.css" />
+  </head>
+  <body>
+    <div class="login-container">
+      <h1>Login</h1>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            placeholder="Enter your username"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="Enter your password"
+            required
+          />
+        </div>
+        <button type="submit" class="login-btn">Login</button>
+      </form>
+      <div class="auth-links">
+        <button type="button" class="signup-btn" onclick="showSignupModal()">
+          Create Account
+        </button>
+      </div>
+    </div>
+
+    <!-- Add Sign Up Modal -->
+    <div id="signup-modal" class="modal">
+      <div class="modal-content">
+        <h2>Create Account</h2>
+        <form id="signup-form">
+          <div class="form-group">
+            <label for="new-username">Username</label>
+            <input type="text" id="new-username" required />
+          </div>
+          <div class="form-group">
+            <label for="new-password">Password</label>
+            <input type="password" id="new-password" required />
+          </div>
+          <div class="form-group">
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" id="confirm-password" required />
+          </div>
+          <button type="submit" class="signup-submit-btn">Sign Up</button>
+          <button type="button" class="cancel-btn" onclick="hideSignupModal()">
+            Cancel
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      const users = [
+        { username: "user1", password: "password1" },
+        { username: "user2", password: "password2" },
+        { username: "1", password: "1" },
+      ];
+
+      function showSignupModal() {
+        document.getElementById("signup-modal").style.display = "flex";
+      }
+
+      function hideSignupModal() {
+        document.getElementById("signup-modal").style.display = "none";
+      }
+
+      document
+        .getElementById("signup-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          const username = document.getElementById("new-username").value;
+          const password = document.getElementById("new-password").value;
+          const confirmPassword =
+            document.getElementById("confirm-password").value;
+
+          if (password !== confirmPassword) {
+            alert("Passwords don't match!");
+            return;
+          }
+
+          if (users.some((user) => user.username === username)) {
+            alert("Username already exists!");
+            return;
+          }
+
+          users.push({ username, password });
+          alert("Account created successfully!");
+          hideSignupModal();
+          document.getElementById("signup-form").reset();
+        });
+
+      document
+        .querySelector("form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          const username = document.getElementById("username").value;
+          const password = document.getElementById("password").value;
+
+          const user = users.find(
+            (user) => user.username === username && user.password === password
+          );
+
+          if (user) {
+            alert("Login successful!");
+            localStorage.setItem("loggedInUser", username);
+            window.location.href = "index.html";
+          } else {
+            alert("Invalid username or password.");
+          }
+        });
+    </script>
+  </body>
+</html>
