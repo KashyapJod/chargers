@@ -343,7 +343,7 @@ body {
 
 .slots-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
     margin-bottom: 1.5rem;
 }
@@ -400,17 +400,23 @@ body {
 
 .button-group {
     display: flex;
-    gap: 0.5rem;
+    justify-content: center;  /* Center buttons horizontally */
+    gap: 1rem;               /* Space between buttons */
+    width: 100%;
+    padding-top: 1rem;       /* Add top padding */
+    margin-top: 1rem;        /* Add top margin */
+    border-top: 1px solid var(--primary-light); /* Optional: adds a subtle separator */
 }
 
 .book-btn, .navigate-btn {
     background-color: var(--primary-green);
     color: #fff;
     border: none;
-    padding: 0.75rem 1rem;
+    padding: 0.75rem 1.5rem;  /* Slightly increased horizontal padding */
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s ease;
+    min-width: 120px;         /* Ensure minimum button width */
 }
 
 .book-btn:hover, .navigate-btn:hover {

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login - Power Up Chargers</title>
     <link rel="stylesheet" href="log.css" />
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
   </head>
   <body>
     <div class="login-container">
@@ -31,6 +32,21 @@
         <button type="submit" class="login-btn">Login</button>
       </form>
       <div class="auth-links">
+        <div class="separator">OR</div>
+        <div
+          id="g_id_onload"
+          data-client_id="YOUR_GOOGLE_CLIENT_ID"
+          data-callback="handleCredentialResponse"
+        ></div>
+        <div
+          class="g_id_signin"
+          data-type="standard"
+          data-size="large"
+          data-theme="outline"
+          data-text="sign_in_with"
+          data-shape="rectangular"
+          data-logo_alignment="left"
+        ></div>
         <button type="button" class="signup-btn" onclick="showSignupModal()">
           Create Account
         </button>
@@ -121,6 +137,29 @@
             alert("Invalid username or password.");
           }
         });
+
+      function handleCredentialResponse(response) {
+        // Decode the credential response
+        const responsePayload = decodeJwtResponse(response.credential);
+
+        // Save user info
+        localStorage.setItem("loggedInUser", responsePayload.name);
+        window.location.href = "index.html";
+      }
+
+      function decodeJwtResponse(token) {
+        const base64Url = token.split(".")[1];
+        const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+        const jsonPayload = decodeURIComponent(
+          atob(base64)
+            .split("")
+            .map(function (c) {
+              return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+            })
+            .join("")
+        );
+        return JSON.parse(jsonPayload);
+      }
     </script>
   </body>
 </html>

@@ -17,26 +17,26 @@ const stationIcon = L.divIcon({
     popupAnchor: [1, -34]
 });
 const stations = [
-    { id: 1, name: "Panaji Central Station", coords: { lat: 15.4909, lng: 73.8278 }, slots: { normal: 4, fast: 3, delayed: 1 } },
-    { id: 2, name: "Vasco QuickCharge", coords: { lat: 15.3983, lng: 73.8112 }, slots: { normal: 5, fast: 2, delayed: 1 } },
-    { id: 3, name: "Margao Station", coords: { lat: 15.2717, lng: 73.9581 }, slots: { normal: 2, fast: 4, delayed: 2 } },
-    { id: 4, name: "Ponda EcoHub", coords: { lat: 15.4026, lng: 74.0183 }, slots: { normal: 3, fast: 2, delayed: 2 } },
-    { id: 5, name: "Mapusa Charging Point", coords: { lat: 15.5931, lng: 73.8158 }, slots: { normal: 4, fast: 3, delayed: 1 } },
-    { id: 6, name: "Calangute PowerStation", coords: { lat: 15.5439, lng: 73.7554 }, slots: { normal: 5, fast: 1, delayed: 1 } },
-    { id: 7, name: "Benaulim Express", coords: { lat: 15.2487, lng: 73.9239 }, slots: { normal: 3, fast: 3, delayed: 2 } },
-    { id: 8, name: "Old Goa Charging Zone", coords: { lat: 15.5036, lng: 73.9129 }, slots: { normal: 4, fast: 2, delayed: 2 } },
-    { id: 9, name: "Dabolim Eco Station", coords: { lat: 15.3809, lng: 73.8339 }, slots: { normal: 3, fast: 4, delayed: 1 } },
-    { id: 10, name: "Colva Charging Hub", coords: { lat: 15.2795, lng: 73.9226 }, slots: { normal: 4, fast: 2, delayed: 2 } },
-    { id: 11, name: "Candolim PowerPoint", coords: { lat: 15.5170, lng: 73.7630 }, slots: { normal: 5, fast: 1, delayed: 2 } },
-    { id: 12, name: "Anjuna FastCharge", coords: { lat: 15.5861, lng: 73.7444 }, slots: { normal: 2, fast: 3, delayed: 3 } },
-    { id: 13, name: "Pernem Charging Spot", coords: { lat: 15.7198, lng: 73.7956 }, slots: { normal: 4, fast: 3, delayed: 1 } },
-    { id: 14, name: "Canacona Station", coords: { lat: 15.0151, lng: 74.0236 }, slots: { normal: 3, fast: 3, delayed: 2 } },
-    { id: 15, name: "Siolim Charging Zone", coords: { lat: 15.6057, lng: 73.7433 }, slots: { normal: 4, fast: 2, delayed: 2 } },
-    { id: 16, name: "Porvorim PowerHub", coords: { lat: 15.5264, lng: 73.8317 }, slots: { normal: 3, fast: 3, delayed: 2 } },
-    { id: 17, name: "Cansaulim Express", coords: { lat: 15.3286, lng: 73.9135 }, slots: { normal: 4, fast: 2, delayed: 2 } },
-    { id: 18, name: "Morjim Hub", coords: { lat: 15.6237, lng: 73.7368 }, slots: { normal: 5, fast: 1, delayed: 1 } },
-    { id: 19, name: "Panjim EcoCharge", coords: { lat: 15.4909, lng: 73.8278 }, slots: { normal: 4, fast: 2, delayed: 2 } },
-    { id: 20, name: "Aldona Charging", coords: { lat: 15.6010, lng: 73.8882 }, slots: { normal: 3, fast: 3, delayed: 2 } }
+    { id: 1, name: "Panaji Central Station", coords: { lat: 15.4909, lng: 73.8278 }, slots: { normal: 4, adaptive: 1 } },
+    { id: 2, name: "Vasco QuickCharge", coords: { lat: 15.3983, lng: 73.8112 }, slots: { normal: 5, adaptive: 1 } },
+    { id: 3, name: "Margao Station", coords: { lat: 15.2717, lng: 73.9581 }, slots: { normal: 2, adaptive: 2 } },
+    { id: 4, name: "Ponda EcoHub", coords: { lat: 15.4026, lng: 74.0183 }, slots: { normal: 3, adaptive: 2 } },
+    { id: 5, name: "Mapusa Charging Point", coords: { lat: 15.5931, lng: 73.8158 }, slots: { normal: 4, adaptive: 1 } },
+    { id: 6, name: "Calangute PowerStation", coords: { lat: 15.5439, lng: 73.7554 }, slots: { normal: 5, adaptive: 1 } },
+    { id: 7, name: "Benaulim Express", coords: { lat: 15.2487, lng: 73.9239 }, slots: { normal: 3, adaptive: 2 } },
+    { id: 8, name: "Old Goa Charging Zone", coords: { lat: 15.5036, lng: 73.9129 }, slots: { normal: 4, adaptive: 2 } },
+    { id: 9, name: "Dabolim Eco Station", coords: { lat: 15.3809, lng: 73.8339 }, slots: { normal: 3, adaptive: 1 } },
+    { id: 10, name: "Colva Charging Hub", coords: { lat: 15.2795, lng: 73.9226 }, slots: { normal: 4, adaptive: 2 } },
+    { id: 11, name: "Candolim PowerPoint", coords: { lat: 15.5170, lng: 73.7630 }, slots: { normal: 5, adaptive: 2 } },
+    { id: 12, name: "Anjuna FastCharge", coords: { lat: 15.5861, lng: 73.7444 }, slots: { normal: 2, adaptive: 3 } },
+    { id: 13, name: "Pernem Charging Spot", coords: { lat: 15.7198, lng: 73.7956 }, slots: { normal: 4, adaptive: 1 } },
+    { id: 14, name: "Canacona Station", coords: { lat: 15.0151, lng: 74.0236 }, slots: { normal: 3, adaptive: 2 } },
+    { id: 15, name: "Siolim Charging Zone", coords: { lat: 15.6057, lng: 73.7433 }, slots: { normal: 4, adaptive: 2 } },
+    { id: 16, name: "Porvorim PowerHub", coords: { lat: 15.5264, lng: 73.8317 }, slots: { normal: 3, adaptive: 2 } },
+    { id: 17, name: "Cansaulim Express", coords: { lat: 15.3286, lng: 73.9135 }, slots: { normal: 4, adaptive: 2 } },
+    { id: 18, name: "Morjim Hub", coords: { lat: 15.6237, lng: 73.7368 }, slots: { normal: 5, adaptive: 1 } },
+    { id: 19, name: "Panjim EcoCharge", coords: { lat: 15.4909, lng: 73.8278 }, slots: { normal: 4, adaptive: 2 } },
+    { id: 20, name: "Aldona Charging", coords: { lat: 15.6010, lng: 73.8882 }, slots: { normal: 3, adaptive: 2 } }
 ];
 
 
@@ -118,8 +118,7 @@ function updateMap(lat, lng) {
             .bindPopup(`
                 <b>${station.name}</b><br>
                 Normal: ${station.slots.normal}<br>
-                Fast: ${station.slots.fast}<br>
-                Delayed: ${station.slots.delayed}
+                Adaptive: ${station.slots.adaptive}
             `)
             .addTo(map);
     });
@@ -129,12 +128,10 @@ function updateStationCard(station) {
     const stationCard = document.querySelector(`[data-station-id="${station.id}"]`);
     if (stationCard) {
         const normalSlot = stationCard.querySelector('.normal-slot');
-        const fastSlot = stationCard.querySelector('.fast-slot');
-        const delayedSlot = stationCard.querySelector('.delayed-slot');
+        const adaptiveSlot = stationCard.querySelector('.adaptive-slot');
 
         normalSlot.textContent = station.slots.normal;
-        fastSlot.textContent = station.slots.fast;
-        delayedSlot.textContent = station.slots.delayed;
+        adaptiveSlot.textContent = station.slots.adaptive;
     }
 }
 
@@ -188,23 +185,18 @@ function findStations() {
             <div class="slots-grid">
                 <div class="slot-type">
                     <div class="slot-count normal-slot">${station.slots.normal}</div>
-                    <div>Normal</div>
+                    <div>Normal Charging</div>
                 </div>
                 <div class="slot-type">
-                    <div class="slot-count fast-slot">${station.slots.fast}</div>
-                    <div>Fast</div>
-                </div>
-                <div class="slot-type">
-                    <div class="slot-count delayed-slot">${station.slots.delayed}</div>
-                    <div>Adaptive Delayed</div>
+                    <div class="slot-count adaptive-slot">${station.slots.adaptive}</div>
+                    <div>Adaptive Charging</div>
                 </div>
             </div>
-            <div class="booking-controls">
+            <div class="booking-controls"></div>
                 <div class="booking-options">
                     <select class="charging-select" id="charging-type-${station.id}" ${bookBtnDisabled}>
                         <option value="normal">Normal Charging</option>
-                        <option value="fast">Fast Charging</option>
-                        <option value="delayed">Adaptive Delayed Charging</option>
+                        <option value="adaptive">Adaptive Charging</option>
                     </select>
                     <select class="time-slot-select" id="time-slot-${station.id}" ${bookBtnDisabled}>
                         <option value="1">7AM - 7PM</option>
