@@ -108,6 +108,10 @@
       </div>
     </div>
 
+    <button id="scrollToTopBtn" class="scroll-to-top-btn">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="script.js"></script>
     <script>
@@ -148,6 +152,19 @@
               logoutButton.style.display === "none" ? "block" : "none";
           });
         }
+
+        const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+        window.addEventListener("scroll", function () {
+          if (window.scrollY > 300) {
+            scrollToTopBtn.style.display = "block";
+          } else {
+            scrollToTopBtn.style.display = "none";
+          }
+        });
+
+        scrollToTopBtn.addEventListener("click", function () {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
       });
 
       document
